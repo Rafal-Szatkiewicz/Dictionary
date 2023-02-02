@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Rafal-Szatkiewicz/dictionary/issues"
   },
-  "homepage": "https://github.com/Rafal-Szatkiewicz/dictionary#readme"
+  "homepage": "https://github.com/Rafal-Szatkiewicz/dictionary#readme",
+  "dependencies": {
+    "owlbot-js": "^2.0.3"
+  }
 }

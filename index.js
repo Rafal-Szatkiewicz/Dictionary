@@ -10,7 +10,7 @@ client.define('owl')
   .then(result => console.log(result))
   .catch(error => console.error(`Error: ${error.message}`));
 
-  axios({
+axios({
    method: "get",
    url: `https://api.api-ninjas.com/v1/thesaurus?word=owl`,
    headers: {

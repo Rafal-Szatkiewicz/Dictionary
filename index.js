@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const test = document.getElementById("test");
 test.innerHTML = "works";
+console.log("test");
 
 const client = Owlbot(process.env.OWL_TOKEN);
 

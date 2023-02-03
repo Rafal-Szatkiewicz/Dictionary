@@ -1,6 +1,5 @@
 const axios = require('axios');
 const Owlbot = require('owlbot-js');
-const fs = require('fs');
 require("dotenv").config();
 
 

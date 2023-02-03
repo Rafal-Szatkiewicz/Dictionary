@@ -2,9 +2,8 @@ const axios = require('axios');
 const Owlbot = require('owlbot-js');
 require("dotenv").config();
 
-console.log("test");
-
 const test = document.getElementById("test");
+test.innerHTML = "works";
 
 const client = Owlbot(process.env.OWL_TOKEN);
 

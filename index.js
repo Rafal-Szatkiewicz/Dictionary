@@ -6,6 +6,9 @@ const test = document.getElementById("test");
 
 const client = Owlbot(process.env.OWL_TOKEN);
 
+
+console.log("test");
+
 client.define('owl')
   .then(result => {
     console.log(result);

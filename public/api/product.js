@@ -23,15 +23,27 @@ router.get('/', async (req, res) => {
   const file = await fs.promises.readFile(path.join(__dirname, './index.html'), 'utf8');
   if(search != "")
   {
+    let exists = true;
 
-    const synonyms = await axios({
-    method: "get",
-    url: `https://api.api-ninjas.com/v1/thesaurus?word=${search}`,
-    headers: {
-       'X-Api-Key': process.env.SYNONYMS_TOKEN,
-    },
+    const definition = await client.define(search)
+    .catch(error => {
+      console.error(`Error: ${error.message}`); 
+      exists = false;
+      res.send(file);
     });
-    res.json(synonyms.data)
+
+    if(exists)
+    {
+      const synonyms = await axios({
+        method: "get",
+        url: `https://api.api-ninjas.com/v1/thesaurus?word=${search}`,
+        headers: {
+           'X-Api-Key': process.env.SYNONYMS_TOKEN,
+        },
+      });
+      console.log(definition);
+      res.json(synonyms.data)
+    }
   }
   else
   {
@@ -44,12 +56,5 @@ router.post('/search', async (req, res) => {
   res.redirect('/');
 
 });
-
-client.define('owl')
-  .then(result => {
-    console.log(result);
-    //result.definitions[0].type;
-  })
-  .catch(error => console.error(`Error: ${error.message}`));
 
  module.exports = router;

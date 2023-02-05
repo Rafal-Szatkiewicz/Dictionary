@@ -1,7 +1,3 @@
-//import axios from 'axios';
-//import Owlbot from 'owlbot-js';
-
-//import express from 'express';
 const axios = require('axios')
 const Owlbot = require('owlbot-js');
 
@@ -30,7 +26,7 @@ router.get('/', async (req, res) => {
 client.define('owl')
   .then(result => {
     console.log(result);
-    //test.innerHTML = result.definitions[0].type;
+    //result.definitions[0].type;
   })
   .catch(error => console.error(`Error: ${error.message}`));
 

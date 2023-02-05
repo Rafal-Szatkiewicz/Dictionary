@@ -1,6 +1,5 @@
 node_modules
 .env
-product.js
 index1.html
 .parcel-cache
 dist

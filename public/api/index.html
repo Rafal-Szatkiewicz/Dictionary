@@ -8,5 +8,9 @@
     </head>
     <body>
         <p id="test">test</p>
+        <form action="/search" method="POST">
+            <input type="text" name="searchName" id="searchId" pattern="[A-Za-z0-9_]+" required>
+            <input type="submit" value="SEARCH">
+        </form>
     </body>
 </html>

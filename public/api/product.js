@@ -15,20 +15,34 @@ router.use(express.static('./api'));
 
 
 const client = Owlbot(process.env.OWL_TOKEN);
+let search = "";
 
 
 router.get('/', async (req, res) => {
 
-  //const file = await fs.promises.readFile(path.join(__dirname, './index.html'), 'utf8');
-  //res.send(file);
-  const file = await axios({
+  const file = await fs.promises.readFile(path.join(__dirname, './index.html'), 'utf8');
+  if(search != "")
+  {
+
+    const synonyms = await axios({
     method: "get",
-    url: `https://api.api-ninjas.com/v1/thesaurus?word=owl`,
+    url: `https://api.api-ninjas.com/v1/thesaurus?word=${search}`,
     headers: {
        'X-Api-Key': process.env.SYNONYMS_TOKEN,
     },
-  });
-  res.json(file.data);
+    });
+    res.json(synonyms.data)
+  }
+  else
+  {
+    res.send(file);
+  }
+});
+router.post('/search', async (req, res) => {
+  
+  search = req.body.searchName;
+  res.redirect('/');
+
 });
 
 client.define('owl')

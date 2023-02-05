@@ -19,8 +19,16 @@ const client = Owlbot(process.env.OWL_TOKEN);
 
 router.get('/', async (req, res) => {
 
-  const file = await fs.promises.readFile(path.join(__dirname, './index.html'), 'utf8');
-  res.send(file);
+  //const file = await fs.promises.readFile(path.join(__dirname, './index.html'), 'utf8');
+  //res.send(file);
+  const file = await axios({
+    method: "get",
+    url: `https://api.api-ninjas.com/v1/thesaurus?word=owl`,
+    headers: {
+       'X-Api-Key': process.env.SYNONYMS_TOKEN,
+    },
+  });
+  res.json(file.data);
 });
 
 client.define('owl')
@@ -29,15 +37,5 @@ client.define('owl')
     //result.definitions[0].type;
   })
   .catch(error => console.error(`Error: ${error.message}`));
-
-axios({
-   method: "get",
-   url: `https://api.api-ninjas.com/v1/thesaurus?word=owl`,
-   headers: {
-      'X-Api-Key': process.env.SYNONYMS_TOKEN,
-   },
- }).then((response) => {
-   console.log(response.data);
- });
 
  module.exports = router;

@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
         method: "get",
         url: `https://api.dictionaryapi.dev/api/v2/entries/en/${search}`
       });
-      console.log(definition);
+      console.log("%j", definition.data);
       res.json(definition.data)
     }
   }

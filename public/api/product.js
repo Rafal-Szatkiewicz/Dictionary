@@ -51,16 +51,47 @@ router.get('/', async (req, res) => {
       let details = ""
       for (let i = 0; i < definition.data[0].meanings.length; i++) 
       {
+        let definitions = "";
+        for (let j = 0; j < definition.data[0].meanings[i].definitions.length; j++) 
+        {
+          if (typeof definition.data[0].meanings[i].definitions[j].example !== 'undefined') 
+          {
+            definitions += `<div class="definitions"><p class="word-meaning">
+            ${definition.data[0].meanings[i].definitions[j].definition}
+            </p>
+            <p class="word-example">
+                ${definition.data[0].meanings[i].definitions[j].example}
+            </p></div>`;
+          }
+          else
+          {
+            definitions += `<div class="definitions"><p class="word-meaning">
+            ${definition.data[0].meanings[i].definitions[j].definition}
+            </p></div>`;
+          }
+        }
+
+        let synonyms = `<h4 class="word-partOfSpeech">Synonyms:</h4>`;
+        for (let j = 0; j < definition.data[0].meanings[i].synonyms.length; j++) 
+        {
+          synonyms += `<p class="synonyms">${definition.data[0].meanings[i].synonyms[j]}</p>`;
+        }
+        if(definition.data[0].meanings[i].synonyms.length == 0){synonyms = ""}
+
+        let antonyms = `<h4 class="word-partOfSpeech">Antonyms:</h4>`;
+        for (let j = 0; j < definition.data[0].meanings[i].antonyms.length; j++) 
+        {
+          antonyms += `<p class="synonyms">${definition.data[0].meanings[i].antonyms[j]}</p>`;
+        }
+        if(definition.data[0].meanings[i].antonyms.length == 0){antonyms = ""}
+
         details += `
         <h3 class="word-partOfSpeech">
             ${definition.data[0].meanings[i].partOfSpeech}
         </h3>
-        <p class="word-meaning">
-            ${definition.data[0].meanings[i].definitions[0].definition}
-        </p>
-        <p class="word-example">
-            ${definition.data[0].meanings[i].definitions[0].example}
-        </p>`;
+       ${definitions}
+       <div class="synonymsCard">${synonyms}</div>
+       <div class="synonymsCard">${antonyms}</div>`;
         //definition.data[0].meanings[0].partOfSpeech
       }
       

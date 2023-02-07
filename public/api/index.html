@@ -19,26 +19,28 @@
 
         <style>
             * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
         }
         *:not(i) {
             font-family: "Poppins", sans-serif;
+            font-size: 18px;
         }
         body {
             background-color: #ae9cff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
         }
         .container {
             background-color: #ffffff;
             width: 90vmin;
-            position: absolute;
-            transform: translate(-50%, -50%);
-            top: 50%;
-            left: 50%;
+            
             padding: 80px 50px;
             border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(38, 33, 61, 0.2);
+            box-shadow: 0 20px 40px rgba(20, 19, 27, 0.2);
         }
         .search-box {
             width: 100%;
@@ -68,13 +70,18 @@
             position: relative;
         }
         .result h3 {
-            font-size: 30px;
+            font-size: 25px;
+            color: #1f194c;
+            margin-bottom: 10px;
+        }
+        .result h2 {
+            font-size: 40px;
             color: #1f194c;
         }
         .result .word {
             display: flex;
             justify-content: space-between;
-            margin-top: 80px;
+            margin-top: 40px;
         }
         .result button {
             background-color: transparent;
@@ -82,6 +89,7 @@
             border: none;
             outline: none;
             font-size: 18px;
+            padding-left: 10px;
         }
         .result .details {
             display: flex;
@@ -89,6 +97,10 @@
             color: #b3b6d4;
             margin: 5px 0 20px 0;
             font-size: 14px;
+        }
+        .word-partOfSpeech
+        {
+            color: #1f194c
         }
         .word-meaning {
             color: #575a7b;
@@ -99,15 +111,22 @@
             border-left: 5px solid #ae9cff;
             padding-left: 20px;
             margin-top: 30px;
+            margin-bottom: 30px;
         }
         .error {
             margin-top: 80px;
             text-align: center;
         }
+        .phonetics
+        {
+            display: inline-flex;
+            border-right: 3px solid #ae9cff;
+            padding-left: 5px;
+            padding-right: 15px;
+        }
         </style>
     </head>
     <body>
-        <audio id="sound"></audio>
         <div class="container">
             <div class="search-box">
                 <form action="/search" method="POST">
@@ -123,9 +142,9 @@
             <div class="result" id="result"></div>
         </div>
         <script>
-            function playSound() 
+            function playSound(el) 
             {
-                const sound = document.getElementById("sound");
+                const sound = el.querySelector(".sound");
                 sound.play();
             }
         </script>

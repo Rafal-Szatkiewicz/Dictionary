@@ -34,37 +34,49 @@ router.get('/', async (req, res) => {
 
     if(exists)
     {
+      let phonetics = "";
+      for (let i = 0; i < definition.data[0].phonetics.length; i++) 
+      {
+        if (definition.data[0].phonetics[i].audio != "" && typeof definition.data[0].phonetics[i].audio !== 'undefined') 
+        {
+          phonetics += `<div class="phonetics"><p>/${definition.data[0].phonetics[i].text || ""}/</p>
+        <button onclick="playSound(this)"><audio class="sound" src="${definition.data[0].phonetics[i].audio}"></audio><i class="fas fa-volume-up"></i></button></div>`;
+        }
+        else
+        {
+          phonetics += `<div class="phonetics"><p>/${definition.data[0].phonetics[i].text || ""}/</p></div>`;
+        }
+        //definition.data[0].meanings[0].partOfSpeech
+      }
+      let details = ""
+      for (let i = 0; i < definition.data[0].meanings.length; i++) 
+      {
+        details += `
+        <h3 class="word-partOfSpeech">
+            ${definition.data[0].meanings[i].partOfSpeech}
+        </h3>
+        <p class="word-meaning">
+            ${definition.data[0].meanings[i].definitions[0].definition}
+        </p>
+        <p class="word-example">
+            ${definition.data[0].meanings[i].definitions[0].example}
+        </p>`;
+        //definition.data[0].meanings[0].partOfSpeech
+      }
       
       //console.log("%j", definition.data);
       let html = `
       <div class="result" id="result">
       <div class="word">
-              <h3>${search}</h3>
-              <button onclick="playSound()"><i class="fas fa-volume-up"></i></button>
+              <h2>${search}</h2>
           </div>
           <div class="details">
-              <p>${definition.data[0].meanings[0].partOfSpeech}</p>
-              <p>/${definition.data[0].phonetic}/</p>
+          ${phonetics}
           </div>
-          <p class="word-meaning">
-             ${definition.data[0].meanings[0].definitions[0].definition}
-          </p>
-          <p class="word-example">
-              ${definition.data[0].meanings[0].definitions[0].example || ""}
-          </p>
+          ${details}
           </div>`;
     
       file = file.replace('<div class="result" id="result">', html);
-      if (definition.data[0].phonetics[1] && typeof definition.data[0].phonetics[1].audio !== 'undefined') 
-      {
-        file = file.replace('<audio id="sound"></audio>', `<audio id="sound" src="${definition.data[0].phonetics[1].audio}"></audio>`);
-      } 
-      else 
-      {
-          file = file.replace('<audio id="sound"></audio>', "");
-          file = file.replace(`<i class="fas fa-volume-up"></i>`, "");
-          file = file.replace(`<button onclick="playSound()"></button>`, "");
-      }
       //res.json(definition.data)
       res.send(file);
     }
@@ -76,7 +88,6 @@ router.get('/', async (req, res) => {
   }
   else
   {
-    file = file.replace('<audio id="sound"></audio>', "");
     res.send(file);
   }
 });

@@ -39,8 +39,26 @@ router.get('/', async (req, res) => {
       {
         if (definition.data[0].phonetics[i].audio != "" && typeof definition.data[0].phonetics[i].audio !== 'undefined') 
         {
+          let src = "";
+          let alt = "";
+          switch (definition.data[0].phonetics[i].audio.substring(definition.data[0].phonetics[i].audio.length-6, definition.data[0].phonetics[i].audio.length-4)) {
+            case "au":
+              src = "https://cdn-icons-png.flaticon.com/512/299/299977.png";
+              alt = "Australian flag";
+              break;
+            case "uk":
+              src = "https://cdn-icons-png.flaticon.com/512/299/299951.png";
+              alt = "United Kingdom flag";
+              break;
+            case "us":
+              src = "https://cdn-icons-png.flaticon.com/512/299/299985.png";
+              alt = "US flag";
+              break;
+            default:
+              break;
+          }
           phonetics += `<div class="phonetics"><p>/${definition.data[0].phonetics[i].text || ""}/</p>
-        <button onclick="playSound(this)"><audio class="sound" src="${definition.data[0].phonetics[i].audio}"></audio><i class="fas fa-volume-up"></i></button></div>`;
+          <button onclick="playSound(this)"><audio class="sound" src="${definition.data[0].phonetics[i].audio}"></audio><i class="fas fa-volume-up"></i><img class="flag" src="${src}"></button></div>`;
         }
         else
         {

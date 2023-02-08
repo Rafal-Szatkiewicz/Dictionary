@@ -74,14 +74,14 @@ router.get('/', async (req, res) => {
         let synonyms = `<h4 class="word-partOfSpeech">Synonyms:</h4>`;
         for (let j = 0; j < definition.data[0].meanings[i].synonyms.length; j++) 
         {
-          synonyms += `<p class="synonyms">${definition.data[0].meanings[i].synonyms[j]}</p>`;
+          synonyms += `<p class="synonyms" onclick="searchSynonym(this)">${definition.data[0].meanings[i].synonyms[j]}</p>`;
         }
         if(definition.data[0].meanings[i].synonyms.length == 0){synonyms = ""}
 
         let antonyms = `<h4 class="word-partOfSpeech">Antonyms:</h4>`;
         for (let j = 0; j < definition.data[0].meanings[i].antonyms.length; j++) 
         {
-          antonyms += `<p class="synonyms">${definition.data[0].meanings[i].antonyms[j]}</p>`;
+          antonyms += `<p class="synonyms" onclick="searchSynonym(this)">${definition.data[0].meanings[i].antonyms[j]}</p>`;
         }
         if(definition.data[0].meanings[i].antonyms.length == 0){antonyms = ""}
 

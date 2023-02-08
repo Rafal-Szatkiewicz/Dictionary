@@ -160,6 +160,10 @@
             right: -40%;
             border-radius: 10px;
         }
+        .clickable:hover
+        {
+            cursor: pointer;
+        }
         </style>
     </head>
     <body>
@@ -172,7 +176,7 @@
                         id="inp-word"
                         name = "searchName"
                     />
-                    <input type="submit" value="Search" id="search-btn">
+                    <input type="submit" value="Search" id="search-btn" class="clickable">
                 </form>
             </div>
             <div class="result" id="result"></div>

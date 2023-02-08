@@ -126,6 +126,7 @@ router.get('/', async (req, res) => {
           </div>`;
     
       file = file.replace('<div class="result" id="result">', html);
+      file = file.replace('height: 100vh;transition: 1.5s;','height: 100%;transition: 1.5s;');
       //res.json(definition.data)
       res.send(file);
     }

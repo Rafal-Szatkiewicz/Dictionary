@@ -123,8 +123,10 @@ router.get('/', async (req, res) => {
           ${phonetics}
           </div>
           ${details}
-          </div>`;
+          </div>
+          <div id="copyright"><p><i>© 2021 Rafał Szatkiewicz</i></p></div>`;
     
+      file = file.replace('<div id="copyright"><p><i>© 2021 Rafał Szatkiewicz</i></p></div>', "");
       file = file.replace('<div class="result" id="result">', html);
       file = file.replace('height: 100vh;transition: 1.5s;','height: 100%;transition: 1.5s;');
       //res.json(definition.data)

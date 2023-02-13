@@ -40,6 +40,7 @@
             height: 100vh;transition: 1.5s;
         }
         .container {
+            position: relative;
             background-color: #ffffff;
             width: 90vmin;
             
@@ -180,6 +181,13 @@
         {
             cursor: pointer;
         }
+        #copyright
+        {
+            position: absolute;
+            margin-top: 30px;
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 0.8rem;
+        }
         </style>
     </head>
     <body>
@@ -196,6 +204,7 @@
                 </form>
             </div>
             <div class="result" id="result"></div>
+            <div id="copyright"><p><i>© 2021 Rafał Szatkiewicz</i></p></div>
         </div>
         <script>
             function playSound(el) 
